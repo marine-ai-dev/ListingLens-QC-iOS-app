@@ -11,16 +11,16 @@ private struct TimeoutError: Error {}
 final class StressHarnessTests: XCTestCase {
     private func fullBatch() -> [PhotoInput] {
         let generators: [() -> CGImage] = [
-            SyntheticImageFactory.sharpCheckerboard,
-            SyntheticImageFactory.blurredCheckerboard,
-            SyntheticImageFactory.tinyResolution,
-            SyntheticImageFactory.highResolution,
-            SyntheticImageFactory.darkImage,
-            SyntheticImageFactory.overexposedImage,
-            SyntheticImageFactory.centralSubjectImage,
-            SyntheticImageFactory.edgeSubjectImage,
-            SyntheticImageFactory.unrelatedImageA,
-            SyntheticImageFactory.unrelatedImageB
+            { SyntheticImageFactory.sharpCheckerboard() },
+            { SyntheticImageFactory.blurredCheckerboard() },
+            { SyntheticImageFactory.tinyResolution() },
+            { SyntheticImageFactory.highResolution() },
+            { SyntheticImageFactory.darkImage() },
+            { SyntheticImageFactory.overexposedImage() },
+            { SyntheticImageFactory.centralSubjectImage() },
+            { SyntheticImageFactory.edgeSubjectImage() },
+            { SyntheticImageFactory.unrelatedImageA() },
+            { SyntheticImageFactory.unrelatedImageB() }
         ]
         var inputs: [PhotoInput] = []
         for i in 0..<20 {
