@@ -4,6 +4,7 @@ import ListingLensQCCore
 #endif
 
 struct ResultsView: View {
+    @EnvironmentObject private var theme: AppTheme
     @ObservedObject var viewModel: AuditViewModel
     private let columns = [GridItem(.adaptive(minimum: 150), spacing: Spacing.md)]
 
@@ -51,7 +52,7 @@ struct ResultsView: View {
                             .foregroundStyle(StatusColor.warning)
                     }
 
-                    PrimaryButton("Start New Audit", identifier: "results.newAuditButton") {
+                    PrimaryButton("Start New Audit", accent: theme.selectedAccent.color, identifier: "results.newAuditButton") {
                         viewModel.reset()
                     }
                 }

@@ -22,14 +22,21 @@ public enum AppAppearance: String, CaseIterable, Identifiable, Codable, Sendable
 @MainActor
 public final class AppTheme: ObservableObject {
     private static let key = "listinglensqc.appearance"
+    private static let accentKey = "listinglensqc.accent"
 
     @Published public var appearance: AppAppearance {
         didSet { UserDefaults.standard.set(appearance.rawValue, forKey: Self.key) }
     }
 
+    @Published public var selectedAccent: AppAccent {
+        didSet { UserDefaults.standard.set(selectedAccent.rawValue, forKey: Self.accentKey) }
+    }
+
     public init() {
         let stored = UserDefaults.standard.string(forKey: Self.key)
         self.appearance = stored.flatMap(AppAppearance.init(rawValue:)) ?? .system
+        let storedAccent = UserDefaults.standard.string(forKey: Self.accentKey)
+        self.selectedAccent = storedAccent.flatMap(AppAccent.init(rawValue:)) ?? .lens
     }
 
     public var backgroundColor: Color {

@@ -5,7 +5,6 @@ import ListingLensQCCore
 
 struct SettingsView: View {
     @EnvironmentObject private var theme: AppTheme
-    @State private var accent: AppAccent = .lens
 
     var body: some View {
         Form {
@@ -19,7 +18,7 @@ struct SettingsView: View {
                 .accessibilityIdentifier("settings.appearancePicker")
             }
             Section("Accent Color") {
-                Picker("Accent", selection: $accent) {
+                Picker("Accent", selection: $theme.selectedAccent) {
                     ForEach(AppAccent.allCases) { a in
                         Text(a.rawValue.capitalized).tag(a)
                     }

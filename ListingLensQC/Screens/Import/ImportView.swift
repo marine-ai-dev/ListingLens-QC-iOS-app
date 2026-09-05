@@ -5,6 +5,7 @@ import ListingLensQCCore
 #endif
 
 struct ImportView: View {
+    @EnvironmentObject private var theme: AppTheme
     @StateObject private var viewModel = AuditViewModel()
     @State private var selectedItems: [PhotosPickerItem] = []
     @State private var navigateToProgress = false
@@ -21,7 +22,7 @@ struct ImportView: View {
                         VStack(spacing: Spacing.lg) {
                             Image(systemName: "camera.viewfinder")
                                 .font(.system(size: 64))
-                                .foregroundStyle(AppAccent.lens.color)
+                                .foregroundStyle(theme.selectedAccent.color)
                                 .accessibilityHidden(true)
                             Text("ListingLens QC")
                                 .font(.largeTitle.bold())
@@ -36,7 +37,7 @@ struct ImportView: View {
                                     .font(.body.weight(.semibold))
                                     .frame(maxWidth: .infinity, minHeight: Metrics.minTouchTarget)
                             }
-                            .background(AppAccent.lens.color, in: RoundedRectangle(cornerRadius: Radius.md))
+                            .background(theme.selectedAccent.color, in: RoundedRectangle(cornerRadius: Radius.md))
                             .foregroundStyle(.white)
                             .padding(.horizontal, Spacing.lg)
                             .accessibilityIdentifier("import.selectPhotosButton")
