@@ -1,5 +1,4 @@
 import SwiftUI
-import ListingLensQCCore
 
 @main
 struct ListingLensQCApp: App {

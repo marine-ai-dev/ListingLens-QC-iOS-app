@@ -1,6 +1,8 @@
 import Foundation
 import SwiftUI
+#if canImport(ListingLensQCCore)
 import ListingLensQCCore
+#endif
 
 /// Thin, testable coordinator holding no business logic itself — it only calls into
 /// `AnalysisPipeline` (Core) and republishes state for the views. All scoring/ranking

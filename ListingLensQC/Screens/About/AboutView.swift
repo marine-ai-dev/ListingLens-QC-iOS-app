@@ -1,5 +1,7 @@
 import SwiftUI
+#if canImport(ListingLensQCCore)
 import ListingLensQCCore
+#endif
 
 struct AboutView: View {
     var body: some View {

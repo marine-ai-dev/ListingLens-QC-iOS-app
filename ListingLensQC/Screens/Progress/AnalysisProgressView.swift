@@ -1,5 +1,7 @@
 import SwiftUI
+#if canImport(ListingLensQCCore)
 import ListingLensQCCore
+#endif
 
 struct AnalysisProgressView: View {
     @ObservedObject var viewModel: AuditViewModel

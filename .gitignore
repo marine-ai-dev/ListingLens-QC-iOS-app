@@ -22,3 +22,9 @@ Package.resolved
 
 # Env
 *.env
+
+# Xcode / local QA
+DerivedData/
+build_dd/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/

@@ -1,5 +1,7 @@
 import SwiftUI
+#if canImport(ListingLensQCCore)
 import ListingLensQCCore
+#endif
 
 struct SettingsView: View {
     @EnvironmentObject private var theme: AppTheme

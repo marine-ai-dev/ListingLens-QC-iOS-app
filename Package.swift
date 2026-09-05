@@ -25,7 +25,7 @@ let package = Package(
             name: "ListingLensQCUI",
             dependencies: ["ListingLensQCCore"],
             path: "ListingLensQC",
-            sources: ["Screens", "App"]
+            sources: ["Screens"]
         ),
         .testTarget(
             name: "ListingLensQCTests",

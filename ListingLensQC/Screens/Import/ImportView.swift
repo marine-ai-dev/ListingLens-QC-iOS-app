@@ -1,6 +1,8 @@
 import SwiftUI
 import PhotosUI
+#if canImport(ListingLensQCCore)
 import ListingLensQCCore
+#endif
 
 struct ImportView: View {
     @StateObject private var viewModel = AuditViewModel()
