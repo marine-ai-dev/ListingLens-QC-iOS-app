@@ -3,6 +3,11 @@ import SwiftUI
 #if canImport(ListingLensQCCore)
 import ListingLensQCCore
 #endif
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
 
 /// Thin, testable coordinator holding no business logic itself — it only calls into
 /// `AnalysisPipeline` (Core) and republishes state for the views. All scoring/ranking
@@ -40,6 +45,22 @@ public final class AuditViewModel: ObservableObject {
     public func cancelAnalysis() {
         analysisTask?.cancel()
         isAnalyzing = false
+    }
+
+    /// Decodes the original selected photo for display. Views never hold decoded
+    /// images themselves — `inputs` (raw `Data`) is the only source of truth, matching
+    /// `PhotoInput`'s "never crosses actor boundaries holding a UIImage" contract.
+    public func image(for id: PhotoID) -> Image? {
+        guard let data = inputs.first(where: { $0.id == id })?.data else { return nil }
+        #if canImport(UIKit)
+        guard let platformImage = UIImage(data: data) else { return nil }
+        return Image(uiImage: platformImage)
+        #elseif canImport(AppKit)
+        guard let platformImage = NSImage(data: data) else { return nil }
+        return Image(nsImage: platformImage)
+        #else
+        return nil
+        #endif
     }
 
     public func reset() {

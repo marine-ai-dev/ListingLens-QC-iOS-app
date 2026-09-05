@@ -33,9 +33,9 @@ struct ResultsView: View {
 
                     LazyVGrid(columns: columns, spacing: Spacing.md) {
                         ForEach(report.scores) { score in
-                            NavigationLink(destination: PhotoDetailView(score: score, isHero: report.hero?.id == score.id)) {
+                            NavigationLink(destination: PhotoDetailView(score: score, isHero: report.hero?.id == score.id, image: viewModel.image(for: score.id))) {
                                 PhotoCard(
-                                    image: Image(systemName: "photo"),
+                                    image: viewModel.image(for: score.id) ?? Image(systemName: "photo"),
                                     score: score.overall,
                                     isHero: report.hero?.id == score.id,
                                     warningCount: score.warnings.count,

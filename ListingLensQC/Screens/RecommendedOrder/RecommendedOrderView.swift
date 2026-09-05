@@ -16,6 +16,12 @@ struct RecommendedOrderView: View {
                                 .font(.headline)
                                 .frame(width: 28)
                                 .accessibilityHidden(true)
+                            (viewModel.image(for: id) ?? Image(systemName: "photo"))
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 44, height: 44)
+                                .clipShape(RoundedRectangle(cornerRadius: Radius.sm))
+                                .accessibilityHidden(true)
                             QualityBadge(score: score.overall)
                             if report.hero?.id == id {
                                 Image(systemName: "star.fill").foregroundStyle(AppAccent.amber.color)

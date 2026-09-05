@@ -6,11 +6,20 @@ import ListingLensQCCore
 struct PhotoDetailView: View {
     let score: PhotoScore
     let isHero: Bool
+    let image: Image?
     private let explanations = ExplanationEngine(localization: LocalizationService.shared)
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: Spacing.md) {
+                if let image {
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(RoundedRectangle(cornerRadius: Radius.md))
+                        .accessibilityHidden(true)
+                }
+
                 QualityBadge(score: score.overall)
                 if isHero {
                     Label("Best Hero Candidate", systemImage: "star.fill")
