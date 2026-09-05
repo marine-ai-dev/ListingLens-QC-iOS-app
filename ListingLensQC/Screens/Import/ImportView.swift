@@ -13,41 +13,52 @@ struct ImportView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: Spacing.lg) {
-                Spacer()
-                Image(systemName: "camera.viewfinder")
-                    .font(.system(size: 64))
-                    .foregroundStyle(AppAccent.lens.color)
-                    .accessibilityHidden(true)
-                Text("ListingLens QC")
-                    .font(.largeTitle.bold())
-                Text("Select up to 20 product photos to check quality on this device. Nothing leaves your phone.")
-                    .font(.body)
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(.secondary)
-                    .padding(.horizontal, Spacing.lg)
+            GeometryReader { proxy in
+                ScrollView {
+                    VStack(spacing: Spacing.lg) {
+                        Spacer(minLength: Spacing.lg)
 
-                PhotosPicker(selection: $selectedItems, maxSelectionCount: AnalysisConfig.maxBatchSize, matching: .images) {
-                    Text("Select Photos")
-                        .font(.body.weight(.semibold))
-                        .frame(maxWidth: .infinity, minHeight: Metrics.minTouchTarget)
-                }
-                .background(AppAccent.lens.color, in: RoundedRectangle(cornerRadius: Radius.md))
-                .foregroundStyle(.white)
-                .padding(.horizontal, Spacing.lg)
-                .accessibilityIdentifier("import.selectPhotosButton")
-                .accessibilityHint("Opens your photo library. Choose one to twenty photos.")
+                        VStack(spacing: Spacing.lg) {
+                            Image(systemName: "camera.viewfinder")
+                                .font(.system(size: 64))
+                                .foregroundStyle(AppAccent.lens.color)
+                                .accessibilityHidden(true)
+                            Text("ListingLens QC")
+                                .font(.largeTitle.bold())
+                            Text("Select up to 20 product photos to check quality on this device. Nothing leaves your phone.")
+                                .font(.body)
+                                .multilineTextAlignment(.center)
+                                .foregroundStyle(.secondary)
+                                .padding(.horizontal, Spacing.lg)
 
-                if let error = viewModel.errorMessage {
-                    Text(error).foregroundStyle(StatusColor.critical).font(.footnote)
+                            PhotosPicker(selection: $selectedItems, maxSelectionCount: AnalysisConfig.maxBatchSize, matching: .images) {
+                                Text("Select Photos")
+                                    .font(.body.weight(.semibold))
+                                    .frame(maxWidth: .infinity, minHeight: Metrics.minTouchTarget)
+                            }
+                            .background(AppAccent.lens.color, in: RoundedRectangle(cornerRadius: Radius.md))
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, Spacing.lg)
+                            .accessibilityIdentifier("import.selectPhotosButton")
+                            .accessibilityHint("Opens your photo library. Choose one to twenty photos.")
+
+                            if let error = viewModel.errorMessage {
+                                Text(error).foregroundStyle(StatusColor.critical).font(.footnote)
+                            }
+                        }
+
+                        Spacer(minLength: Spacing.lg)
+
+                        NavigationLink(destination: SettingsView()) {
+                            Label("Settings", systemImage: "gearshape")
+                        }
+                        .accessibilityIdentifier("import.settingsLink")
+                        .padding(.bottom, Spacing.lg)
+                    }
+                    .padding()
+                    .frame(minHeight: proxy.size.height)
                 }
-                Spacer()
-                NavigationLink(destination: SettingsView()) {
-                    Label("Settings", systemImage: "gearshape")
-                }
-                .accessibilityIdentifier("import.settingsLink")
             }
-            .padding()
             .navigationDestination(isPresented: $navigateToProgress) {
                 AnalysisProgressView(viewModel: viewModel)
             }
