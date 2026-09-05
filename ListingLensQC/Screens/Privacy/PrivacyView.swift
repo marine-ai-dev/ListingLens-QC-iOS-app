@@ -1,4 +1,5 @@
 import SwiftUI
+import ListingLensQCCore
 
 struct PrivacyView: View {
     var body: some View {

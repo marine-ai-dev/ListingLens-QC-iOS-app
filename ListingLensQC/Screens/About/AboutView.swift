@@ -1,4 +1,5 @@
 import SwiftUI
+import ListingLensQCCore
 
 struct AboutView: View {
     var body: some View {
