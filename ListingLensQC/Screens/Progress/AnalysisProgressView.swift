@@ -19,9 +19,9 @@ struct AnalysisProgressView: View {
                     .scaleEffect(1.6)
                     .accessibilityIdentifier("progress.bar")
             }
-            Text("Analyzing \(viewModel.inputs.count) photo\(viewModel.inputs.count == 1 ? "" : "s") on this device…")
+            Text("Analyzing \(viewModel.inputs.count) photo(s) on this device…")
                 .font(.body)
-                .accessibilityLabel("Analyzing \(viewModel.inputs.count) photos")
+                .accessibilityLabel(Text("Analyzing \(viewModel.inputs.count) photo(s)"))
             SecondaryButton("Cancel", identifier: "progress.cancelButton") {
                 viewModel.cancelAnalysis()
             }

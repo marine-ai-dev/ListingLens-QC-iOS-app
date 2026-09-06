@@ -27,7 +27,7 @@ public final class AuditViewModel: ObservableObject {
 
     public func startAnalysis() {
         guard !inputs.isEmpty else {
-            errorMessage = "Select at least one photo to begin."
+            errorMessage = String(localized: "Select at least one photo to begin.")
             return
         }
         isAnalyzing = true

@@ -1,5 +1,23 @@
 # QA
 
+> **Local Simulator phase results (2026-09-06):** the "What has and has not run"
+> section below is from the Cloud phase (no Xcode/toolchain available there) and is
+> now superseded. Locally, on Xcode 26.6 / iOS 26.5 Simulator (iPhone 17 — iPhone 14
+> is not installed on this Xcode): `swift build`/`swift test` pass with **47 tests,
+> 0 failures**; the Xcode app target (`ListingLensQC.xcodeproj`) builds clean in both
+> Debug and Release with no warnings; the app has been installed and launched, and
+> the full flow (Import → PhotosPicker → Results → Best Hero Candidate → Photo Detail
+> → Recommended Order → Settings → About → Privacy → new analysis) has been manually
+> exercised with synthetic fixtures. Visually verified: Light/Dark/Black appearances,
+> all 3 accents (including live-reactivity and relaunch persistence), and all 5
+> shipped locales (uk/en/zh-Hans/ja/ko) across Import/Settings/Results/Photo
+> Detail/About/Privacy with no clipping or untranslated leftovers found. Not yet
+> done: an exhaustive 5-locale x 4-appearance x 8-screen screenshot matrix, a full
+> VoiceOver/Reduce-Motion pass, and exhaustive edge-case UI exercise (relied on the
+> existing automated stress/duplicate/determinism tests for the 10/20-photo and
+> repeat-batch scenarios rather than re-driving 20 individual PhotosPicker taps by
+> hand). Physical-device testing remains out of scope for this phase.
+
 ## Automated coverage (this repository)
 
 - Unit tests: resolution classification, sharpness comparative tests (sharp vs. blurred

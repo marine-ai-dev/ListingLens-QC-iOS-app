@@ -1,12 +1,12 @@
 import SwiftUI
 
 public struct PrimaryButton: View {
-    let title: String
+    let title: LocalizedStringKey
     let accent: Color
     let action: () -> Void
     let identifier: String
 
-    public init(_ title: String, accent: Color = AppAccent.lens.color, identifier: String = "", action: @escaping () -> Void) {
+    public init(_ title: LocalizedStringKey, accent: Color = AppAccent.lens.color, identifier: String = "", action: @escaping () -> Void) {
         self.title = title
         self.accent = accent
         self.action = action
@@ -21,17 +21,17 @@ public struct PrimaryButton: View {
         }
         .background(accent, in: RoundedRectangle(cornerRadius: Radius.md, style: .continuous))
         .foregroundStyle(.white)
-        .accessibilityIdentifier(identifier.isEmpty ? "primaryButton.\(title)" : identifier)
+        .accessibilityIdentifier(identifier.isEmpty ? "primaryButton" : identifier)
         .accessibilityAddTraits(.isButton)
     }
 }
 
 public struct SecondaryButton: View {
-    let title: String
+    let title: LocalizedStringKey
     let action: () -> Void
     let identifier: String
 
-    public init(_ title: String, identifier: String = "", action: @escaping () -> Void) {
+    public init(_ title: LocalizedStringKey, identifier: String = "", action: @escaping () -> Void) {
         self.title = title
         self.action = action
         self.identifier = identifier
@@ -44,7 +44,7 @@ public struct SecondaryButton: View {
                 .frame(maxWidth: .infinity, minHeight: Metrics.minTouchTarget)
         }
         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: Radius.md, style: .continuous))
-        .accessibilityIdentifier(identifier.isEmpty ? "secondaryButton.\(title)" : identifier)
+        .accessibilityIdentifier(identifier.isEmpty ? "secondaryButton" : identifier)
         .accessibilityAddTraits(.isButton)
     }
 }

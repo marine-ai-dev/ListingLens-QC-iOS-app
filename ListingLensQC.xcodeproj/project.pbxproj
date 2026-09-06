@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		006B0FAFD9C4090E5C51B25A /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 493C76882C6508A57844F7CF /* Localizable.xcstrings */; };
 		070C96A07098114E2329C672 /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F981170FC41668EFBC9D7FC1 /* PrivacyView.swift */; };
 		0934CCACBEB2840FCFE64B4C /* LocalizationCatalogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25A5746E48ED13D09242C3 /* LocalizationCatalogs.swift */; };
 		118419AB37443A50F4DEC8F9 /* AppAccent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD06A454DA44EA9822D1EA /* AppAccent.swift */; };
@@ -24,9 +25,11 @@
 		6C37721F6936A89430B6C607 /* ListingLensQCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DE64FB85082B347B38C612 /* ListingLensQCApp.swift */; };
 		7B936EC12F5A3D667CECD394 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFE5CB9AC355CA822CB2012 /* AppTheme.swift */; };
 		81CFD3C8B5ACC86540E830DC /* PhotoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4051B4B46CB60FBC1661AA1F /* PhotoModels.swift */; };
+		82B74BA6AFFCB94BA08AD5AC /* AppLanguagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499BFA31E0092AA974C6612 /* AppLanguagePickerView.swift */; };
 		8367ACB00E564AAA507BF717 /* AnalysisProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DFFED10A4DA3A16D9824D /* AnalysisProgressView.swift */; };
 		83A71FAD1018463CD0EA0B12 /* ImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05002A74973829156CA67CBB /* ImportView.swift */; };
 		89229C106C1380DA051E669B /* QualityBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325DCAFE5B3EBCAF7AD8A4EE /* QualityBadge.swift */; };
+		903226B87659AB051B8A282C /* AppLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99D9F93CF6B219125E45A6E /* AppLocalization.swift */; };
 		904F254A1F1154A88F093306 /* LumaBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6043FC5E381CADB5CDCDF4 /* LumaBuffer.swift */; };
 		9E1C49913FD7AEE4002E08AB /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95BEDC9AC83CFAD2C50657E /* Buttons.swift */; };
 		A491708E148F0DD9BE064E42 /* AuditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FE1D0B3505E18FB4A08DDF /* AuditViewModel.swift */; };
@@ -40,6 +43,7 @@
 		D11A5FB18DAD130DF9E1AB24 /* PhotoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F182F321E93EDF35D49EC841 /* PhotoCard.swift */; };
 		D2D67038335D7C272454B932 /* FramingExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A32F90EA4B3F59D2BD48A6D /* FramingExtractor.swift */; };
 		D61AFE6DD3E1EC01891D80A9 /* HeroScoringEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D8E95AD090F478F457A589 /* HeroScoringEngine.swift */; };
+		DFA25A155129DF7F8B2C2643 /* LocalizationKit in Frameworks */ = {isa = PBXBuildFile; productRef = DBF2E318DA2D79A55AA30273 /* LocalizationKit */; };
 		DFB6EF04DE24D70D1ED05DAD /* ExplanationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8BFCD8F47890CF307E8084 /* ExplanationEngine.swift */; };
 		E58D1E83AC6EC434F2ACF0DE /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D5799318B45F681BE95E01 /* Tokens.swift */; };
 		F98F37466CDEAF9F29EECB32 /* SignalNormalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1024E4B5274017699DA7CED /* SignalNormalizer.swift */; };
@@ -55,22 +59,26 @@
 		185944CB6B493602DEB8341A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		1DB0C9B94DD4FFF912C3E593 /* RecommendedOrderEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedOrderEngine.swift; sourceTree = "<group>"; };
 		23FD06A454DA44EA9822D1EA /* AppAccent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAccent.swift; sourceTree = "<group>"; };
+		2C34EFFFC0053F783FF5504D /* iOS_localization_kit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = iOS_localization_kit; path = ../iOS_localization_kit; sourceTree = SOURCE_ROOT; };
 		325DCAFE5B3EBCAF7AD8A4EE /* QualityBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualityBadge.swift; sourceTree = "<group>"; };
 		3A36F371AD7FF70CCD5F7123 /* RawSignals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawSignals.swift; sourceTree = "<group>"; };
 		4051B4B46CB60FBC1661AA1F /* PhotoModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModels.swift; sourceTree = "<group>"; };
 		47BA7777B126577CAE0E39E2 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		48D10741492C435F60C48EA6 /* GlassSurface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassSurface.swift; sourceTree = "<group>"; };
+		493C76882C6508A57844F7CF /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		4A32F90EA4B3F59D2BD48A6D /* FramingExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FramingExtractor.swift; sourceTree = "<group>"; };
 		5BB7C58C02590F6B72D4E2F9 /* SharpnessExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharpnessExtractor.swift; sourceTree = "<group>"; };
 		73D8E95AD090F478F457A589 /* HeroScoringEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroScoringEngine.swift; sourceTree = "<group>"; };
 		7629F637A398D331340E7FF1 /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
 		81050DD10403D5AA2AE4DB10 /* AnalysisPipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisPipeline.swift; sourceTree = "<group>"; };
+		8499BFA31E0092AA974C6612 /* AppLanguagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguagePickerView.swift; sourceTree = "<group>"; };
 		8EAEB1E1BA2FED7E776B2E7B /* LocalizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationService.swift; sourceTree = "<group>"; };
 		93FA39031E0D93F5D3CFEA88 /* ExposureExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureExtractor.swift; sourceTree = "<group>"; };
 		9FCE73FFF7AF1DC408F57AD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BB3305070E9A7C5BE797A4FD /* ScoringModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoringModels.swift; sourceTree = "<group>"; };
 		BE25A5746E48ED13D09242C3 /* LocalizationCatalogs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationCatalogs.swift; sourceTree = "<group>"; };
 		C8FE1D0B3505E18FB4A08DDF /* AuditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditViewModel.swift; sourceTree = "<group>"; };
+		C99D9F93CF6B219125E45A6E /* AppLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalization.swift; sourceTree = "<group>"; };
 		CBF8F8ABC27734F2AB06D4E7 /* ImageDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDecoder.swift; sourceTree = "<group>"; };
 		CE387B9C9028D1D52DA1639E /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 		D9DE64FB85082B347B38C612 /* ListingLensQCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingLensQCApp.swift; sourceTree = "<group>"; };
@@ -87,6 +95,17 @@
 		FAFE5CB9AC355CA822CB2012 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		FB7DFFED10A4DA3A16D9824D /* AnalysisProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EADE733DC1C129D61DBF2893 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFA25A155129DF7F8B2C2643 /* LocalizationKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		023BD95F517C81BC1329CE95 /* Ranking */ = {
@@ -184,6 +203,7 @@
 		5F563C83B185C0D64008342B /* App */ = {
 			isa = PBXGroup;
 			children = (
+				C99D9F93CF6B219125E45A6E /* AppLocalization.swift */,
 				9FCE73FFF7AF1DC408F57AD0 /* Info.plist */,
 				D9DE64FB85082B347B38C612 /* ListingLensQCApp.swift */,
 			);
@@ -292,6 +312,7 @@
 		AEEA7EEAADCF66B552BB4B66 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				8499BFA31E0092AA974C6612 /* AppLanguagePickerView.swift */,
 				185944CB6B493602DEB8341A /* SettingsView.swift */,
 			);
 			path = Settings;
@@ -313,6 +334,7 @@
 				E60D39284EE88C6F62512F5D /* Assets */,
 				6146C855368F1FEECAC600D3 /* DesignSystem */,
 				7AD4443EF1A4A978C9164903 /* Localization */,
+				CD5685728116BA08B8779BFF /* Packages */,
 				916B80826D88FB3BF2CA5005 /* Screens */,
 				DCA3A0FD1EB624E3EC39862D /* Products */,
 			);
@@ -332,6 +354,14 @@
 				7629F637A398D331340E7FF1 /* PhotoDetailView.swift */,
 			);
 			path = PhotoDetail;
+			sourceTree = "<group>";
+		};
+		CD5685728116BA08B8779BFF /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				2C34EFFFC0053F783FF5504D /* iOS_localization_kit */,
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 		D8CEF2714DE7771B7B63CEA4 /* Glass */ = {
@@ -366,6 +396,7 @@
 			isa = PBXGroup;
 			children = (
 				F2BB560C096EC54D6025DF53 /* Assets.xcassets */,
+				493C76882C6508A57844F7CF /* Localizable.xcstrings */,
 				47BA7777B126577CAE0E39E2 /* PrivacyInfo.xcprivacy */,
 			);
 			path = Assets;
@@ -396,6 +427,7 @@
 			buildPhases = (
 				EB9384529D7015AE511075FA /* Sources */,
 				D07E2AA907C49528B55420AE /* Resources */,
+				EADE733DC1C129D61DBF2893 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -403,6 +435,7 @@
 			);
 			name = ListingLensQC;
 			packageProductDependencies = (
+				DBF2E318DA2D79A55AA30273 /* LocalizationKit */,
 			);
 			productName = ListingLensQC;
 			productReference = 111C6BDA96D9DF90C0F63FAB /* ListingLensQC.app */;
@@ -428,6 +461,9 @@
 			);
 			mainGroup = B8A5FEFADC5ACCDCB3BCD05C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A791A260547EA46A8D3CB2E6 /* XCLocalSwiftPackageReference "../iOS_localization_kit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DCA3A0FD1EB624E3EC39862D /* Products */;
 			projectDirPath = "";
@@ -444,6 +480,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBFB3A9B59CC70EB3C986CE7 /* Assets.xcassets in Resources */,
+				006B0FAFD9C4090E5C51B25A /* Localizable.xcstrings in Resources */,
 				677DFCA095591AFFC1484A27 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -460,6 +497,8 @@
 				FCEDA1165049E4D0A7C11BC1 /* AnalysisPipeline.swift in Sources */,
 				8367ACB00E564AAA507BF717 /* AnalysisProgressView.swift in Sources */,
 				118419AB37443A50F4DEC8F9 /* AppAccent.swift in Sources */,
+				82B74BA6AFFCB94BA08AD5AC /* AppLanguagePickerView.swift in Sources */,
+				903226B87659AB051B8A282C /* AppLocalization.swift in Sources */,
 				7B936EC12F5A3D667CECD394 /* AppTheme.swift in Sources */,
 				A491708E148F0DD9BE064E42 /* AuditViewModel.swift in Sources */,
 				9E1C49913FD7AEE4002E08AB /* Buttons.swift in Sources */,
@@ -681,6 +720,20 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		A791A260547EA46A8D3CB2E6 /* XCLocalSwiftPackageReference "../iOS_localization_kit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../iOS_localization_kit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DBF2E318DA2D79A55AA30273 /* LocalizationKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LocalizationKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0969740D9DDF0E59E0BE9D21 /* Project object */;
 }

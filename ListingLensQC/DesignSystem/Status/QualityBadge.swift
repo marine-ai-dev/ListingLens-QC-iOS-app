@@ -7,7 +7,7 @@ public struct QualityBadge: View {
 
     public init(score: Int) { self.score = score }
 
-    private var band: (label: String, color: Color, symbol: String) {
+    private var band: (label: LocalizedStringKey, color: Color, symbol: String) {
         switch score {
         case 80...100: return ("Excellent", StatusColor.good, "checkmark.seal.fill")
         case 55..<80: return ("Good", StatusColor.warning, "exclamationmark.circle.fill")
@@ -17,13 +17,17 @@ public struct QualityBadge: View {
 
     public var body: some View {
         let b = band
-        Label("\(score) · \(b.label)", systemImage: b.symbol)
-            .font(.caption.weight(.semibold))
-            .padding(.horizontal, Spacing.sm)
-            .padding(.vertical, Spacing.xs)
-            .background(b.color.opacity(0.18), in: Capsule())
-            .foregroundStyle(b.color)
-            .accessibilityLabel("Quality score \(score) out of 100, \(b.label)")
+        Label {
+            Text("\(score) · ") + Text(b.label)
+        } icon: {
+            Image(systemName: b.symbol)
+        }
+        .font(.caption.weight(.semibold))
+        .padding(.horizontal, Spacing.sm)
+        .padding(.vertical, Spacing.xs)
+        .background(b.color.opacity(0.18), in: Capsule())
+        .foregroundStyle(b.color)
+        .accessibilityLabel(Text("Quality score \(score) out of 100, ") + Text(b.label))
     }
 }
 

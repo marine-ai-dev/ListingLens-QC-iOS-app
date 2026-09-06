@@ -29,7 +29,11 @@ struct RecommendedOrderView: View {
                             Spacer()
                         }
                         .accessibilityElement(children: .combine)
-                        .accessibilityLabel("Position \(index + 1), score \(score.overall)\(report.hero?.id == id ? ", hero photo" : "")")
+                        .accessibilityLabel(
+                            report.hero?.id == id
+                                ? Text("Position \(index + 1), score \(score.overall), hero photo")
+                                : Text("Position \(index + 1), score \(score.overall)")
+                        )
                         .accessibilityIdentifier("recommendedOrder.row.\(index)")
                     }
                 }

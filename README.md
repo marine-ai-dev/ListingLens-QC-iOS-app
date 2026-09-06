@@ -74,11 +74,24 @@ package could replace it without touching any screen.
 
 ## 🌐 Localization
 
-Real translations for English, Ukrainian, Simplified Chinese, Japanese, and Korean.
-`ru`, `be`, and `fa`/`fa-IR` are hard-excluded everywhere (registry, picker, fallback),
-with regression tests. A shared `LocalizationKit` repository was not connected to this
-Cloud session — see `docs/LOCALIZATION.md` for the local integration boundary shipped
-in its place.
+The real shared **LocalizationKit** package (`../iOS_localization_kit` locally) is
+integrated into the Xcode app target: it owns locale selection, persistence, the
+"Use System Language" toggle, and denylist enforcement for `ru`/`be`/`fa`/`fa-IR`
+(structurally impossible to select — enforced by `SupportedLocale.init`, not just a
+UI-level filter). ListingLens QC's own product copy lives in its own String Catalog,
+`Assets/Localizable.xcstrings`, with real translations for the 5 locales this app
+ships — **Ukrainian, English, Simplified Chinese, Japanese, and Korean** — covering
+every screen's static UI text, not just the dynamic warning/strength vocabulary.
+LocalizationKit's own picker lists its full ~40-locale global registry regardless of
+a host's configured candidate set, which doesn't fit a 5-locale product, so Settings
+uses a small app-owned picker view (`AppLanguagePickerView`) built directly on
+`LocalizationManager`/`SupportedLocale` instead — same shared architecture and
+persistence, just a picker scoped to what this app actually ships.
+The pre-existing local `LocalizationService`/`ExplanationEngine` (dynamic
+per-photo warning/strength/hero-reason sentences — outside LocalizationKit's scope)
+stays as the single source for that vocabulary, kept in sync with
+`LocalizationManager`'s active locale rather than doing its own detection.
+See `docs/LOCALIZATION.md` for the full integration writeup.
 
 ## ♿ Accessibility
 
@@ -87,41 +100,48 @@ targets, and UI test identifiers throughout. Details and honest gaps: `docs/ACCE
 
 ## 🧪 Testing
 
-Unit + integration + a 20-image stress harness, all against synthetically generated
-fixtures (no real/copyrighted photos ever committed). See `docs/QA.md` for exact
-coverage and what has/hasn't actually been executed in this repository's build
-environment.
+47 unit/integration tests (Analysis, Scoring, Similarity, Localization, a 20-image
+stress harness), all against synthetically generated fixtures (no real/copyrighted
+photos ever committed) — run via `swift test`. The app has also been manually
+exercised end-to-end in iOS Simulator (Import → Results → Photo Detail →
+Recommended Order → Settings → About → Privacy, across Light/Dark/Black appearances,
+all 3 accents, and all 5 shipped locales). See `docs/QA.md` for exact coverage.
 
 ## 📸 Screenshots
 
-No real UI screenshots exist yet — this repository was authored without Xcode/simulator
-access. See `store/SCREENSHOT_PLAN.md` for the planned 7 scenes and the XCUITest
-scaffolding approach for capturing them in a future macOS session.
+`scripts/capture_screenshots.sh` boots a Simulator, installs the built app, seeds
+synthetic fixtures, and captures the Import screen automatically, printing the
+follow-up `simctl io screenshot` command for each further screen (full UI automation
+via XCUITest is not yet wired in). No committed screenshot files yet — see
+`store/SCREENSHOT_PLAN.md`.
 
 ## 🚀 Getting started
 
 ```
 git clone <this repo>
 cd ListingLens-QC-iOS-app
-swift build   # requires Xcode 16+ / a Swift 5.9+ toolchain with iOS SDK
+swift build   # SwiftPM library/test targets — requires Xcode 16+ / Swift 5.9+
 swift test
 ```
 
-To build the actual iOS app (not just the Swift Package), open `Package.swift` in
-Xcode 16+ or run `swift package generate-xcodeproj`, then add an App target depending on
-`ListingLensQCUI`. See `docs/RELEASE.md`.
+The real native iOS app target lives in `ListingLensQC.xcodeproj`, generated from
+`project.yml` via [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`xcodegen generate`
+after editing `project.yml`). Open the `.xcodeproj` in Xcode to build/run on a
+Simulator or device. See `docs/RELEASE.md`.
 
 ## 🛠 Requirements
 
 - iOS 17.0+
 - Xcode 16+ (for the app target / simulator / device builds)
-- No external dependencies — first-party Apple frameworks only.
+- [XcodeGen](https://github.com/yonaskolb/XcodeGen) to regenerate `ListingLensQC.xcodeproj` after editing `project.yml`
+- A local checkout of the shared `iOS_localization_kit` package as a sibling directory
+  (`../iOS_localization_kit` relative to this repo) — only required for the Xcode app
+  target, not for `swift build`/`swift test`.
 
 ## 🗺 Roadmap
 
 - Replace the local `DesignSystem` with a shared `DesignKit` package.
-- Replace the local `LocalizationService` with the shared `LocalizationKit` package once
-  connected.
+- Wire `scripts/capture_screenshots.sh` up to XCUITest for full screenshot automation.
 - Persist past audits locally (currently in-memory only, per session).
 - Expand automated screenshot capture once a macOS/Xcode CI runner has actually executed
   `.github/workflows/ios-ci.yml`.

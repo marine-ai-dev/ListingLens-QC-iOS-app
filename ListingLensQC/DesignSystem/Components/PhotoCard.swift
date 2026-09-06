@@ -44,6 +44,6 @@ public struct PhotoCard: View {
         }
         .accessibilityIdentifier(identifier)
         .accessibilityElement(children: .combine)
-        .accessibilityHint(isHero ? "Recommended hero photo" : "")
+        .accessibilityHint(isHero ? Text("Recommended hero photo") : Text(""))
     }
 }

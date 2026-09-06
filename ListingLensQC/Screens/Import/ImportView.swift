@@ -78,7 +78,7 @@ struct ImportView: View {
             }
         }
         guard !loaded.isEmpty else {
-            viewModel.errorMessage = "Could not load the selected photos."
+            viewModel.errorMessage = String(localized: "Could not load the selected photos.")
             return
         }
         viewModel.inputs = loaded

@@ -1,5 +1,16 @@
 # Completion Report — ListingLens QC
 
+> **Local-phase addendum (2026-09-06):** this document is the Cloud phase's
+> point-in-time report and is kept as a historical record below. Since it was
+> written: a real Xcode app target now exists (`ListingLensQC.xcodeproj`, via
+> XcodeGen/`project.yml`); the test suite has grown to **47 tests** (not the 44
+> below); the shared `LocalizationKit` package has been integrated for locale
+> selection/persistence, with ListingLens QC's own `Assets/Localizable.xcstrings`
+> now covering all static UI text across all 5 shipped locales (previously only the
+> dynamic explanation vocabulary was translated); and the app has been built,
+> launched, and visually verified end-to-end in iOS Simulator. See `docs/LOCALIZATION.md`
+> and `docs/QA.md` for current details — do not treat figures below as current.
+
 ## Final status
 
 The Cloud phase is complete. A full Swift/SwiftUI source tree for ListingLens QC —
