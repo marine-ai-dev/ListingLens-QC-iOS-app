@@ -6,6 +6,8 @@ import ListingLensQCCore
 struct ResultsView: View {
     @EnvironmentObject private var theme: AppTheme
     @ObservedObject var viewModel: AuditViewModel
+    /// Pops all the way back to Import - see `AnalysisProgressView.dismissToRoot`.
+    let dismissToRoot: () -> Void
     private let columns = [GridItem(.adaptive(minimum: 150), spacing: Spacing.md)]
 
     var body: some View {
@@ -22,6 +24,7 @@ struct ResultsView: View {
                                     .foregroundStyle(.secondary)
                             }
                         }
+                        .accessibilityElement(children: .combine)
                         .accessibilityIdentifier("results.heroCard")
                     }
 
@@ -30,6 +33,7 @@ struct ResultsView: View {
                             .frame(maxWidth: .infinity, minHeight: Metrics.minTouchTarget)
                     }
                     .background(.thinMaterial, in: RoundedRectangle(cornerRadius: Radius.md))
+                    .accessibilityElement(children: .combine)
                     .accessibilityIdentifier("results.recommendedOrderLink")
 
                     LazyVGrid(columns: columns, spacing: Spacing.md) {
@@ -54,6 +58,7 @@ struct ResultsView: View {
 
                     PrimaryButton("Start New Audit", accent: theme.selectedAccent.color, identifier: "results.newAuditButton") {
                         viewModel.reset()
+                        dismissToRoot()
                     }
                 }
                 .padding()

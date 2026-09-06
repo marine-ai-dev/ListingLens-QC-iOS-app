@@ -1,22 +1,51 @@
 # QA
 
-> **Local Simulator phase results (2026-09-06):** the "What has and has not run"
-> section below is from the Cloud phase (no Xcode/toolchain available there) and is
-> now superseded. Locally, on Xcode 26.6 / iOS 26.5 Simulator (iPhone 17 — iPhone 14
-> is not installed on this Xcode): `swift build`/`swift test` pass with **47 tests,
-> 0 failures**; the Xcode app target (`ListingLensQC.xcodeproj`) builds clean in both
-> Debug and Release with no warnings; the app has been installed and launched, and
-> the full flow (Import → PhotosPicker → Results → Best Hero Candidate → Photo Detail
-> → Recommended Order → Settings → About → Privacy → new analysis) has been manually
-> exercised with synthetic fixtures. Visually verified: Light/Dark/Black appearances,
-> all 3 accents (including live-reactivity and relaunch persistence), and all 5
-> shipped locales (uk/en/zh-Hans/ja/ko) across Import/Settings/Results/Photo
-> Detail/About/Privacy with no clipping or untranslated leftovers found. Not yet
-> done: an exhaustive 5-locale x 4-appearance x 8-screen screenshot matrix, a full
-> VoiceOver/Reduce-Motion pass, and exhaustive edge-case UI exercise (relied on the
-> existing automated stress/duplicate/determinism tests for the 10/20-photo and
-> repeat-batch scenarios rather than re-driving 20 individual PhotosPicker taps by
-> hand). Physical-device testing remains out of scope for this phase.
+> **Local Simulator phase results (2026-09-06, continued):** the "What has and has
+> not run" section below is from the Cloud phase (no Xcode/toolchain available
+> there) and is now superseded. Locally, on Xcode 26.6 / iOS 26.5 Simulator
+> (iPhone 17 — iPhone 14 is not installed on this Xcode):
+>
+> - `swift build`/`swift test`: **47 tests, 0 failures**. The Xcode app target
+>   builds clean in Debug and Release, no warnings.
+> - A real **`ListingLensQCUITests`** XCUITest target now exists (11 tests, all
+>   passing, verified across two independent full-suite runs) driving the actual
+>   app in Simulator: Import launch; a deterministic 10-photo flow through
+>   Results → Photo Detail → Recommended Order → Start New Audit → back to a
+>   clean Import; a 20-photo stress flow (no hang, exact 20-count via a
+>   scroll-and-collect helper that works around `LazyVGrid`/`List`
+>   virtualization); a duplicates+near-duplicate+unrelated 4-photo batch with
+>   warning verification; a same-batch-twice determinism check (same hero
+>   explanation, same Recommended Order positions/scores); cancel-during-analysis;
+>   Settings/About/Privacy content; Appearance persistence across relaunch; all 3
+>   accents; the language picker's exact 5-locale scoping (no forbidden locales);
+>   and live (no-relaunch) locale switching. Deterministic photo batches are
+>   injected via a `#if DEBUG`-only path (`UITestFixtures.swift`,
+>   `-UITestFixtureBatch mixed10|stress20|duplicates`) rather than driving the
+>   real PhotosPicker grid, which XCUITest cannot do reliably. Verified this path
+>   cannot reach Release: `grep`/`strings` on the built Release binary finds zero
+>   occurrences of the launch-argument strings.
+> - **Real bugs found and fixed by writing/running these UI tests** (not found by
+>   manual tapping in the previous pass): "Start New Audit" and "Cancel" reset the
+>   view model but never actually popped the navigation stack back to Import,
+>   leaving the user stranded on a dead Results/Progress screen — both now use an
+>   explicit `dismissToRoot` closure threaded down from `ImportView`. The Hero
+>   card and "View Recommended Order" row weren't grouped as single accessible
+>   elements (`.accessibilityElement(children: .combine)` was missing), which
+>   both broke VoiceOver coherence and made them unfindable by identifier in
+>   XCUITest.
+> - Visually verified manually beyond the automated suites: Light/Dark/Black
+>   appearances and all 3 accents (including live-reactivity and relaunch
+>   persistence) across Import/Settings; all 5 shipped locales
+>   (uk/en/zh-Hans/ja/ko) across Import/Settings/Results/Photo
+>   Detail/About/Privacy with no clipping or untranslated leftovers found; max
+>   accessibility Dynamic Type on Import (scrolls correctly, nothing clipped).
+> - Not done: a full VoiceOver-narration listen-through (element grouping was
+>   verified structurally via the UI tests above, but the actual spoken output
+>   was not audited word-by-word), an explicit Reduce Motion toggle-and-exercise
+>   pass, and an exhaustive 5-locale × 4-appearance × 8-screen screenshot matrix
+>   (the XCUITest suite's `XCTAttachment` screenshots cover 8 screens in the
+>   default locale/appearance only). Physical-device testing remains out of scope
+>   for this phase.
 
 ## Automated coverage (this repository)
 

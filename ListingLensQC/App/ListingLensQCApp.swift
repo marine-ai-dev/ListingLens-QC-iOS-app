@@ -5,11 +5,21 @@ import LocalizationKit
 
 @main
 struct ListingLensQCApp: App {
-    @StateObject private var theme = AppTheme()
+    @StateObject private var theme: AppTheme
     #if canImport(LocalizationKit)
-    @State private var localization = AppLocalization.makeManager()
+    @State private var localization: LocalizationManager
     @Environment(\.scenePhase) private var scenePhase
     #endif
+
+    init() {
+        #if DEBUG
+        UITestSupport.resetStateIfRequested()
+        #endif
+        _theme = StateObject(wrappedValue: AppTheme())
+        #if canImport(LocalizationKit)
+        _localization = State(wrappedValue: AppLocalization.makeManager())
+        #endif
+    }
 
     var body: some Scene {
         WindowGroup {

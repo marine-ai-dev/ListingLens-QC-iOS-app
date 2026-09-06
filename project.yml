@@ -34,14 +34,29 @@ targets:
         GENERATE_INFOPLIST_FILE: NO
         MARKETING_VERSION: "1.0.0"
         CURRENT_PROJECT_VERSION: "1"
+  ListingLensQCUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: ListingLensQCUITests
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.marineaidev.listinglensqc.uitests
+        SWIFT_VERSION: "5.9"
+        TEST_TARGET_NAME: ListingLensQC
+        GENERATE_INFOPLIST_FILE: YES
 schemes:
   ListingLensQC:
     build:
       targets:
         ListingLensQC: all
+        ListingLensQCUITests: [test]
     run:
       config: Debug
     test:
       config: Debug
+      targets:
+        - ListingLensQCUITests
     archive:
       config: Release

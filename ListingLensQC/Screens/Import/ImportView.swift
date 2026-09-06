@@ -61,13 +61,36 @@ struct ImportView: View {
                 }
             }
             .navigationDestination(isPresented: $navigateToProgress) {
-                AnalysisProgressView(viewModel: viewModel)
+                AnalysisProgressView(viewModel: viewModel, dismissToRoot: { navigateToProgress = false })
             }
             .onChange(of: selectedItems) { _, newItems in
                 Task { await loadItems(newItems) }
             }
+            #if DEBUG && !canImport(ListingLensQCCore)
+            .task { injectUITestFixturesIfRequested() }
+            #endif
         }
     }
+
+    #if DEBUG && !canImport(ListingLensQCCore)
+    /// UI-test-only deterministic fixture path (see `UITestFixtures.swift`, which
+    /// lives in `ListingLensQC/App/` - only part of the unified Xcode app target's
+    /// module, never the separate SwiftPM `ListingLensQCUI` library this same file
+    /// also compiles as). `!canImport(ListingLensQCCore)` is this codebase's existing
+    /// convention (see the `import ListingLensQCCore` guard above) for "we're
+    /// compiled as the merged Xcode app target, not the separate SwiftPM module" -
+    /// needed here because `#if DEBUG` alone doesn't distinguish the two: `swift
+    /// test` also builds in a Debug-equivalent configuration, and `UITestFixtures`
+    /// doesn't exist in that compilation unit at all.
+    private func injectUITestFixturesIfRequested() {
+        guard let name = UITestFixtures.requestedBatchName(),
+              let fixtures = UITestFixtures.batch(named: name) else { return }
+        viewModel.inputs = fixtures
+        viewModel.errorMessage = nil
+        viewModel.startAnalysis()
+        navigateToProgress = true
+    }
+    #endif
 
     private func loadItems(_ items: [PhotosPickerItem]) async {
         guard !items.isEmpty else { return } // user cancelled picker

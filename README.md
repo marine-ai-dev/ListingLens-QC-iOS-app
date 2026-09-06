@@ -100,20 +100,43 @@ targets, and UI test identifiers throughout. Details and honest gaps: `docs/ACCE
 
 ## 🧪 Testing
 
-47 unit/integration tests (Analysis, Scoring, Similarity, Localization, a 20-image
-stress harness), all against synthetically generated fixtures (no real/copyrighted
-photos ever committed) — run via `swift test`. The app has also been manually
-exercised end-to-end in iOS Simulator (Import → Results → Photo Detail →
-Recommended Order → Settings → About → Privacy, across Light/Dark/Black appearances,
-all 3 accents, and all 5 shipped locales). See `docs/QA.md` for exact coverage.
+47 `swift test` unit/integration tests (Analysis, Scoring, Similarity, Localization,
+a 20-image stress harness), all against synthetically generated fixtures (no
+real/copyrighted photos ever committed). A separate **`ListingLensQCUITests`**
+XCUITest target (11 tests) drives the real app in Simulator end-to-end — Import,
+the full 1/10/20-photo and duplicate/near-duplicate flows, determinism across two
+runs, Settings/About/Privacy, appearance switching, and live language switching —
+using a `#if DEBUG`-only synthetic-fixture-injection path (`-UITestFixtureBatch`,
+see `docs/QA.md`) instead of driving the real PhotosPicker. Run it from Xcode
+(⌘U) or:
+
+```
+xcodebuild test -project ListingLensQC.xcodeproj -scheme ListingLensQC \
+  -destination 'platform=iOS Simulator,name=iPhone 17'
+```
+
+See `docs/QA.md` for exact coverage and what's been manually verified beyond the
+automated suites (theme/accent/locale visual matrix, etc).
 
 ## 📸 Screenshots
 
-`scripts/capture_screenshots.sh` boots a Simulator, installs the built app, seeds
-synthetic fixtures, and captures the Import screen automatically, printing the
-follow-up `simctl io screenshot` command for each further screen (full UI automation
-via XCUITest is not yet wired in). No committed screenshot files yet — see
-`store/SCREENSHOT_PLAN.md`.
+The XCUITest suite attaches a named screenshot (`XCTAttachment`) at each major
+screen during its normal run — Import, Analysis Progress, Results, Photo Detail,
+Recommended Order, Settings, About, Privacy — using only synthetic fixtures. Pull
+them out of the result bundle after a run:
+
+```
+xcodebuild test -project ListingLensQC.xcodeproj -scheme ListingLensQC \
+  -destination 'platform=iOS Simulator,name=iPhone 17' \
+  -resultBundlePath TestResults.xcresult
+xcrun xcresulttool export attachments --path TestResults.xcresult --output-path screenshots/
+```
+
+`scripts/capture_screenshots.sh` remains as a lighter-weight alternative that
+doesn't need the UI test target at all (boots a Simulator, installs the app, seeds
+synthetic fixtures, captures Import, and prints the follow-up `simctl io
+screenshot` command for each further screen). No committed screenshot files yet —
+see `store/SCREENSHOT_PLAN.md`.
 
 ## 🚀 Getting started
 
