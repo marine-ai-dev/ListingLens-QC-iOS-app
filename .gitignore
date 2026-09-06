@@ -28,3 +28,4 @@ DerivedData/
 build_dd/
 *.xcodeproj/xcuserdata/
 *.xcodeproj/project.xcworkspace/xcuserdata/
+screenshots/
